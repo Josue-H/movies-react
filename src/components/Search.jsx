@@ -1,14 +1,10 @@
 import styles from "./Search.module.css";
 import {FiSearch} from "react-icons/fi";
-import {useNavigate } from "react-router";
-import { useQuery } from "../hooks/useQuery";
+import { useSearchParams } from "react-router-dom";
 
 export function Search() {
-    const query = useQuery();
+    const [query, setQuery] = useSearchParams();
     const search = query.get("search");
-
-    const history = useNavigate(" ");
-
 
     const handleSubmit  = (e)=>{
         e.preventDefault();
@@ -25,7 +21,7 @@ export function Search() {
                     aria-label="Search Movies"
                     onChange={(e) => {
                         const value = e.target.value;
-                        history("/?search=" + value);
+                        setQuery({search: value})
                       }}
                 />
                 <FiSearch size={20} color="black" className={styles.searchButton} />     
